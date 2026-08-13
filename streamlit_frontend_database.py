@@ -16,6 +16,9 @@ def reset_chat():
     st.session_state['message_history'] = []
 
 def add_thread(thread_id):
+    # Ensure chat_threads is always a list (retrieve_all_threads may return a set internally)
+    if not isinstance(st.session_state['chat_threads'], list):
+        st.session_state['chat_threads'] = list(st.session_state['chat_threads'])
     if thread_id not in st.session_state['chat_threads']:
         st.session_state['chat_threads'].append(thread_id)
 
@@ -101,4 +104,4 @@ if user_input:
             )
         )
 
-    st.session_state['message_history'].append({'role': 'assistant', 'content': ai_message})
+    st.session_state['message_history'].append({'role': 'assistant', 'content': ai_message})ant', 'content': ai_message})
